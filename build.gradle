@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        maven {
+            url 'http://dl.bintray.com/sponiro/gradle-plugins'
+        }
+    }
+    dependencies {
+        classpath group: 'de.fanero.gradle.plugin.nar', name: 'gradle-nar-plugin', version: '0.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'de.fanero.gradle.plugin.nar'
+
+group = 'com.ticomgeo.fame'
+version = '1.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url 'http://dl.bintray.com/sponiro/gradle-plugins' }
+}
+
+ext {
+    nifiVersion = '1.6.0'
+}
+
+dependencies {
+    compile "org.apache.nifi:nifi-api:${nifiVersion}"
+    compile "org.apache.nifi:nifi-utils:${nifiVersion}"
+    compile "org.apache.nifi:nifi-processor-utils:${nifiVersion}"
+    compile('com.google.guava:guava:24.1-jre') {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+        exclude group: 'org.checkerframework', module: 'checker-compat-qual'
+        exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
+        exclude group: 'com.google.j2objc', module: 'j2objc-annotations'
+        exclude group: 'org.codehaus.mojo', module: 'animal-sniffer-annotations'
+    }
+
+    compile 'org.slf4j:slf4j-api:1.7.18'
+
+    testCompile "org.apache.nifi:nifi-mock:${nifiVersion}"
+    testCompile 'junit:junit:4.10'
+
+    nar "org.apache.nifi:nifi-standard-services-api-nar:0.2.1"
+}
+
