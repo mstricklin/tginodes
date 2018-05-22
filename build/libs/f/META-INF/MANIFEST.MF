@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Nar-Dependency-Group: org.apache.nifi
-Nar-Version: 1.0-SNAPSHOT
-Nar-Dependency-Version: 0.2.1
-Nar-Id: tgi-nodes
-Nar-Group: com.ticomgeo.fame
-Nar-Dependency-Id: nifi-standard-services-api-nar
-
